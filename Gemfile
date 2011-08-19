@@ -22,6 +22,8 @@ gem 'jquery-rails'
 gem 'barometer'
 
 gem "rspec-rails", :group => [:test, :development]
+gem "capybara", :group => :test
+
 
 # Use unicorn as the web server
 # gem 'unicorn'
