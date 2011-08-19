@@ -9,7 +9,11 @@ class Model
     }
   end
   
-  def persisted?
-    false
+  def persisted?()
+    false 
+  end
+  
+  def new_record?() 
+    true 
   end
 end
