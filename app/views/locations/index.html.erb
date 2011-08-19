@@ -1,0 +1,5 @@
+<h2>Enter your location</h2>
+<%= form_for @location do |f| %>
+  <%= text_field_tag :query %>
+  <%= f.submit "Go" %>
+<% end %>
