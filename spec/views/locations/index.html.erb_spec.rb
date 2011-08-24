@@ -6,7 +6,7 @@ describe "locations/index.html.erb" do
 
     render
     
-    rendered.should have_selector("form[action='/locations'][method='post']")
+    rendered.should have_selector("form[action='/locations/search'][method='post']")
     rendered.should have_field("query")
     rendered.should have_selector("input[type='submit']")
   end
