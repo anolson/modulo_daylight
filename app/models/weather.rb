@@ -7,15 +7,35 @@ class Weather < Model
   validates_presence_of :query
  
   def sunset
-    measurements.current.sun.set
+    current.sun.set
   end
 
   def current_time_at
-    measurements.current.current_at
+    current.current_at
+  end
+  
+  def daylight_remaining
+    sunset - current_time_at
+  end
+  
+  def location
+    measurements.location
   end
   
   private
     def measurements
-       @measurements ||= Barometer.new(@query).measure
+       weather.measurements.first
+    end
+    
+    def current
+       weather.current
+    end
+
+    def weather
+       @weather ||= barometer.measure
+    end
+        
+    def barometer
+      Barometer.new(@query)
     end
 end

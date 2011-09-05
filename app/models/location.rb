@@ -12,6 +12,10 @@ class Location < Model
     @weather.sunset - @weather.current_time_at
   end
   
+  def name
+    @weather.location.name
+  end
+  
   def self.query(query)
     Location.new(:weather => Weather.new(:query => query))
   end
