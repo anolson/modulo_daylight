@@ -1,12 +1,12 @@
 require 'spec_helper'
 
-describe "locations/index.html.erb" do
+describe "forecasts/index.html.erb" do
   it "displays a search form" do
-    assign(:location, Location.new)
+    assign(:forecast, Forecast.new)
 
     render
     
-    rendered.should have_selector("form[action='/locations/search'][method='post']")
+    rendered.should have_selector("form[action='/forecasts/search'][method='post']")
     rendered.should have_field("query")
     rendered.should have_selector("input[type='submit']")
   end

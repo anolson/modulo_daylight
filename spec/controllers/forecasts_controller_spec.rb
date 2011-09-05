@@ -1,10 +1,10 @@
 require 'spec_helper'
 
-describe LocationsController do
+describe ForecastsController do
   describe "GET index" do
-    it "assigns @location" do
+    it "assigns @forecast" do
       get :index
-      assigns(:location).should be_a_new(Location)
+      assigns(:forecast).should be_a_new(Forecast)
     end
     
     it "renders the index template" do
@@ -14,9 +14,9 @@ describe LocationsController do
   end
   
   describe "POST search" do
-    it "assigns @locations" do
-      post :search, :location => {:query => '24060'}
-      assigns(:location).name.should == "Blacksburg, VA"
+    it "assigns @forecasts" do
+      post :search, :query => '24060'
+      assigns(:forecast).location_name.should == "Blacksburg, VA"
     end
     
     # it "renders the index template" do

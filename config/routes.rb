@@ -1,9 +1,9 @@
 ModuloDaylight::Application.routes.draw do
-  resources :locations do
+  resources :forecasts do
     post 'search', :on => :collection
   end
 
-  root :to => 'locations#index'
+  root :to => 'forecasts#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

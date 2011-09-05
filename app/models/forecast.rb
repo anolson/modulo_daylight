@@ -1,25 +1,29 @@
 require 'barometer'
 require 'base'
 
-class Weather < Model
+class Forecast < Model
 
   attr_accessor :query
   validates_presence_of :query
  
+  def self.query(query)
+    self.new(:query => query)
+  end
+ 
   def sunset
-    current.sun.set
+    current.sun.set.to_t
   end
 
-  def current_time_at
-    current.current_at
+  def current_time
+    current.current_at.to_t
   end
   
   def daylight_remaining
-    sunset - current_time_at
+    Time.at(sunset - current_time).utc
   end
   
-  def location
-    measurements.location
+  def location_name
+    measurements.location.name
   end
   
   private
