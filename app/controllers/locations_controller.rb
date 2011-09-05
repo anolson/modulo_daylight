@@ -5,5 +5,6 @@ class LocationsController < ApplicationController
   end
   
   def search
+    @location = Location.query(params[:query])
   end
 end
