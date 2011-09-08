@@ -1,6 +1,7 @@
 ModuloDaylight::Application.routes.draw do
   resources :forecasts do
     post 'search', :on => :collection
+    get 'today', :on => :collection
   end
 
   root :to => 'forecasts#index'

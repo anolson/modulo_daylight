@@ -6,4 +6,8 @@ class ForecastsController < ApplicationController
   def search
     @forecast = Forecast.query(params[:query])
   end
+  
+  def today
+    @forecast = Forecast.today
+  end
 end
