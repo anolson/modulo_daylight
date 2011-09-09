@@ -1,13 +1,12 @@
 ModuloDaylight::Application.routes.draw do
-  resources :forecasts do
+  resources :forecasts, :only => :index do
     post 'search', :on => :collection
-    get 'today', :on => :collection
   end
 
   scope ":state/:city", :as => "locations" do
     resource :forecast, :only => :show, :controller => "locations/forecasts"
   end
-
+  
   root :to => 'forecasts#index'
   # The priority is based upon order of creation:
   # first created -> highest priority.
