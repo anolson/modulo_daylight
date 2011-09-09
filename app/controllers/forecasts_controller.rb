@@ -5,6 +5,6 @@ class ForecastsController < ApplicationController
   
   def search
     location = Query.query_location(params[:query])
-    redirect_to locations_forecast_path(:state => location.state, :city => location.city)    
+    redirect_to locations_forecast_path(location.underscore_city_and_state)
   end
 end

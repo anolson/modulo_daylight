@@ -12,7 +12,7 @@ class Location < ActiveRecord::Base
   end
    
   def self.find_or_create_by_state_and_city(options = {}, &block)
-    options.each { |k, v| v.gsub("_", " ").downcase! if(k == :city || k == :state) }
+    remove_underscores!(options)
     Location.find_by_state_and_city(options[:state], options[:city]) || Location.create(options, &block)
   end
     
@@ -27,8 +27,17 @@ class Location < ActiveRecord::Base
   def query_string
     "#{city}, #{state}"
   end
-  
+
   def today
     @today ||= Time.now.in_time_zone(timezone).to_date
   end
+
+  def underscore_city_and_state
+    { :city => city.gsub(" ", "_"), :state => state.gsub(" ", "_") }
+  end
+
+  private
+    def remove_underscores!(options)
+      options.each { |k, v| v.gsub("_", " ").downcase! if(k == :city || k == :state) }
+    end
 end
