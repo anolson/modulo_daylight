@@ -14,8 +14,9 @@ ActiveRecord::Schema.define(:version => 20110906195729) do
 
   create_table "forecasts", :force => true do |t|
     t.date     "date"
-    t.datetime "sunset_at"
+    t.datetime "sunset_in_seconds"
     t.integer  "location_id"
+    t.boolean  "cached",            :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -24,6 +25,7 @@ ActiveRecord::Schema.define(:version => 20110906195729) do
     t.string   "state"
     t.string   "city"
     t.string   "timezone"
+    t.boolean  "cached",     :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

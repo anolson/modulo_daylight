@@ -4,6 +4,7 @@ class CreateLocations < ActiveRecord::Migration
       t.string :state
       t.string :city
       t.string :timezone
+      t.boolean :cached, :default => false
       t.timestamps
     end
   end

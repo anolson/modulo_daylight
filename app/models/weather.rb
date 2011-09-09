@@ -8,8 +8,8 @@ class Weather < Model
     self.new(:query => query)
   end
   
-  def sunset
-    current.sun.set.to_t.utc
+  def sunset_in_seconds
+    current.sun.set.total_seconds
   end
 
   def location
@@ -18,11 +18,11 @@ class Weather < Model
   
   private
     def city
-      measurement.location.city
+      measurement.location.city.downcase
     end
 
     def state
-      measurement.location.state_name
+      measurement.location.state_code.downcase
     end
 
     def timezone
