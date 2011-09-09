@@ -12,7 +12,7 @@ class Location < ActiveRecord::Base
   end
    
   def self.find_or_create_by_state_and_city(options = {})
-    options.each { |k, v| v.downcase! }
+    options.each { |k, v| v.gsub("_", " ").downcase! }
     Location.find_by_state_and_city(options[:state], options[:city]) || Location.create(options)
   end
   
