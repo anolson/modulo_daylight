@@ -21,7 +21,7 @@ class Location < ActiveRecord::Base
   end
   
   def name
-    "#{city.capitalize}, #{state.upcase}"
+    "#{city.titleize}, #{state.upcase}"
   end
   
   def query_string
