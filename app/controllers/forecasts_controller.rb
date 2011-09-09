@@ -4,10 +4,7 @@ class ForecastsController < ApplicationController
   end
   
   def search
-    @forecast = Forecast.query(params[:query])
-  end
-  
-  def today
-    @forecast = Forecast.today
+    location = Query.query_location(params[:query])
+    redirect_to locations_forecast_path(:state => location.state, :city => location.city)    
   end
 end
