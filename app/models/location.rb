@@ -37,7 +37,7 @@ class Location < ActiveRecord::Base
   end
 
   private
-    def remove_underscores!(options)
+    def self.remove_underscores!(options)
       options.each { |k, v| v.gsub("_", " ").downcase! if(k == :city || k == :state) }
     end
 end
