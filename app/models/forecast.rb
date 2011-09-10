@@ -19,10 +19,24 @@ class Forecast < ActiveRecord::Base
   end
 
   def daylight_remaining
-    Time.at(sunset - current_time).utc
+    return Time.at(0).utc if after_sunset?
+    
+    Time.at(daylight_delta.abs).utc
+  end
+  
+  def before_sunset?
+    daylight_delta > 0
+  end
+  
+  def after_sunset?
+    daylight_delta < 0
   end
   
   private
+    def daylight_delta
+      @daylight_delta ||= sunset - current_time
+    end
+    
     def time_of_sunset
       @time_of_sunset ||= Time.at(sunset_in_seconds).utc
     end
