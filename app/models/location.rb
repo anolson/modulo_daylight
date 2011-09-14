@@ -17,7 +17,7 @@ class Location < ActiveRecord::Base
   end
 
   def forecast_for_today
-    forecasts.select { |f| f.today? } || Forecast.create(:location => self)
+    forecasts.select { |f| f.today? }.first || Forecast.create(:location => self)
   end
   
   def name
