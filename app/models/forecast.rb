@@ -5,8 +5,9 @@ class Forecast < ActiveRecord::Base
   def cache_forecast()
     unless cached?
       weather = Weather.query(location.query_string)
-      update_attributes(:sunset_in_seconds => weather.sunset_in_seconds, :cached => true)
+      update_attributes(:cached => true, :sunset_in_seconds => weather.sunset_in_seconds)
     end
+    update_attributes(:date => localized_date_today)
   end
   
   def current_time
@@ -32,7 +33,15 @@ class Forecast < ActiveRecord::Base
     daylight_delta < 0
   end
   
+  def today?
+    date == today
+  end
+
   private
+    def today
+      Time.now.in_time_zone(location.timezone).to_date
+    end
+
     def daylight_delta
       @daylight_delta ||= sunset - current_time
     end

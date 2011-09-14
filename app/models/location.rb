@@ -7,7 +7,7 @@ class Location < ActiveRecord::Base
     unless cached?
       weather = Weather.query(query_string)
       update_attributes(weather.location.merge(:cached => true))
-      Forecast.create(:cached => true, :date => today, :location => self, :sunset_in_seconds => weather.sunset_in_seconds) 
+      Forecast.create(:cached => true, :location => self, :sunset_in_seconds => weather.sunset_in_seconds)
     end
   end
    
@@ -15,9 +15,9 @@ class Location < ActiveRecord::Base
     remove_underscores!(options)
     Location.find_by_state_and_city(options[:state], options[:city]) || Location.create(options, &block)
   end
-    
+
   def forecast_for_today
-    forecasts.where(:date => today).first || Forecast.create(:date => today, :location => self)
+    forecasts.select { |f| f.today? } || Forecast.create(:location => self)
   end
   
   def name
@@ -26,10 +26,6 @@ class Location < ActiveRecord::Base
   
   def query_string
     "#{city}, #{state}"
-  end
-
-  def today
-    @today ||= Time.now.in_time_zone(timezone).to_date
   end
 
   def underscore_city_and_state
