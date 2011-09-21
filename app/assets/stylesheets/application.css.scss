@@ -1,0 +1,114 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+*/
+$light_blue: #C3CFDF;
+$lighter_blue: #EDF3FE;
+$dark_blue: #597AA6;
+$darker_blue: #455E7F;
+
+$light_grey: #EEE;
+$dark_grey: #777;
+$darker_grey: #444;
+
+$body_background_color: $light_grey;
+$body_text_color: $dark_grey;
+
+$input_text_color: $darker_grey;
+
+$footer_background_color: $lighter_blue; 
+$footer_text_color: $darker_blue; 
+
+$gradient_start: $light_grey;
+$gradient_end: #BBB;
+
+$section_border_color: $darker_blue;
+$section_color: $dark_blue;
+
+@mixin button {
+  border: 1px solid #dark_grey;
+}
+
+@mixin wrapper {
+  margin:10px auto;
+  width: 460px;
+}
+
+@mixin text_with_shadow {
+  color:$light_blue;
+  text-shadow:0 2px 3px $darker_blue;
+  font-weight:normal;
+}
+
+body { 
+  background:$body_background_color; 
+  color:$body_text_color;
+  font-family:"Helvetica Neue", "Helvetica";
+}
+
+input {
+  border: 1px solid $section_border_color;
+  border-radius:4px;
+  color: $input_text_color;
+  padding:8px 6px;
+  font-size:16px;
+  &[type="submit"] {
+    background: -webkit-linear-gradient($gradient_start, $gradient_end);
+  }
+}
+
+footer { 
+  @include wrapper;
+  font-size:12px;
+}
+
+section { 
+  @include wrapper;
+  background:$section_color; 
+  border:3px solid $section_border_color;
+  border-radius:5px;
+  margin-top:40px;
+  
+  .content {
+    margin:20px;
+    text-align:center;
+  }
+  
+  h2 {
+    @include text_with_shadow;
+    font-size:32px;
+  }
+
+  h3 {
+    @include text_with_shadow;
+    display:inline;
+    font-size:16px;
+  }
+  
+  footer {
+    margin:0;
+    width:auto;
+    border-top: 1px solid $section_border_color;
+    background:$footer_background_color;
+    border-radius:0 0 5px 5px;
+    
+    h4 {
+      color:$darker_blue;
+      font-size:12px;
+      font-weight:normal;
+      margin:0;
+      padding:10px;
+    }
+  }
+}
+
+time {
+  @include text_with_shadow;
+  font-family: "Futura", "Arial";
+  font-size:80px;
+  margin:5px;
+}
+
+.center { text-align:center; }

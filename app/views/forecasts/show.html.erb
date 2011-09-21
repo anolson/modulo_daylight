@@ -1,0 +1,9 @@
+<section>
+  <div class="content center">
+    <time datetime="@forecast.daylight_remaining"><%= format_time @forecast.daylight_remaining %></time>
+    <h3 class="time">of daylight remaining.</h3>      
+  </div>
+  <footer style="text-align:center">
+    <h4>Sunset for <%= @forecast.location.name %> at <%= format_time @forecast.sunset %></h4>      
+  </footer>
+</section>
