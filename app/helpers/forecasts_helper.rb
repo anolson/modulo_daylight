@@ -1,4 +1,4 @@
-module Locations::ForecastsHelper
+module ForecastsHelper
   def sunset_in_words(time)
     format = "%l:%M"
     if(time.hour == 0)

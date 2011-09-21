@@ -1,10 +1,12 @@
 class ForecastsController < ApplicationController
-  def index
-    @forecast = Forecast.new
+  before_filter :find_location
+
+  def show
+    @forecast = @location.forecast_for_today
   end
   
-  def search
-    location = Query.query_location(params[:query])
-    redirect_to locations_forecast_path(location.underscore_city_and_state)
-  end
+  private 
+    def find_location
+      @location = Location.find_or_create_by_state_and_city(:state => params[:state], :city => params[:city])
+    end
 end

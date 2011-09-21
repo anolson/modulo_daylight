@@ -3,8 +3,8 @@ ModuloDaylight::Application.routes.draw do
     post 'search', :on => :collection
   end
 
-  scope ":state/:city", :as => "locations" do
-    resource :forecast, :only => :show, :controller => "locations/forecasts"
+  scope ":state/:city", :as => "location" do
+    resource :forecast, :only => :show
   end
   
   root :to => 'locations#index'
