@@ -7,7 +7,7 @@ class Forecast < ActiveRecord::Base
       weather = Weather.query(location.query_string)
       update_attributes(:cached => true, :sunset_in_seconds => weather.sunset_in_seconds)
     end
-    update_attributes(:date => localized_date_today)
+    update_attributes(:date => today)
   end
   
   def current_time
