@@ -1,0 +1,1 @@
+Barometer.config = { 1 => [:wunderground] }
