@@ -1,7 +1,7 @@
 class Forecast < ActiveRecord::Base
   after_create :cache_forecast
   belongs_to :location
-  
+
   def cache_forecast()
     unless cached?
       weather = Weather.query(location.query_string)
@@ -10,13 +10,8 @@ class Forecast < ActiveRecord::Base
     update_attributes(:date => today)
   end
   
-  def current_time
-    Time.now.in_time_zone(location.timezone)
-  end
-  
   def sunset
-    Time.zone = location.timezone 
-    Time.zone.local(date.year, date.month, date.day, time_of_sunset.hour, time_of_sunset.min)
+    localize_time Time.local(date.year, date.month, date.day, time_of_sunset.hour, time_of_sunset.min, time_of_sunset.sec)
   end
 
   def daylight_remaining
@@ -24,28 +19,36 @@ class Forecast < ActiveRecord::Base
     
     Time.at(daylight_delta.abs).utc
   end
-  
+
   def before_sunset?
     daylight_delta > 0
   end
-  
+
   def after_sunset?
     daylight_delta < 0
   end
-  
+
   def today?
     date == today
   end
 
   private
+    def localize_time(time)
+      time.in_time_zone(location.timezone)
+    end
+
+    def current_time
+      localize_time Time.now
+    end
+
     def today
-      Time.now.in_time_zone(location.timezone).to_date
+      current_time.to_date
     end
 
     def daylight_delta
       @daylight_delta ||= sunset - current_time
     end
-    
+
     def time_of_sunset
       @time_of_sunset ||= Time.at(sunset_in_seconds).utc
     end
