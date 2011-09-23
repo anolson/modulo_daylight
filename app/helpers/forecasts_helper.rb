@@ -1,9 +1,6 @@
 module ForecastsHelper
-  def sunset_in_words(time)
-    format = "%l:%M"
-    if(time.hour == 0)
-      format = "%k:%M"
-    end
-    time.strftime(format)
+  def format_time(time)
+    format = (time.hour == 0) && "%k:%M" || "%l:%M"
+    time.strftime(format).lstrip
   end
 end
