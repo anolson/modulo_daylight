@@ -39,5 +39,7 @@ module ModuloDaylight
 
     # Enable the asset pipeline
     config.assets.enabled = true
+
+    Barometer.config = { 1 => [:wunderground] }
   end
 end
