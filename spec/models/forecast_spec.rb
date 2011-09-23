@@ -1,28 +1,33 @@
 require 'spec_helper'
 
-describe "Forecast" do
-  it "requires a valid query" do
-    forecast = Forecast.query(nil)
-    forecast.should_not be_valid
-    forecast.should have(1).errors_on(:query)
-
-    forecast = Forecast.query('')
-    forecast.should_not be_valid
-    forecast.should have(1).errors_on(:query)
+describe Forecast do
+  before(:each) do
+    @location = Location.new(:city => 'blacksburg', :state => 'va', :timezone => 'America/New_York')
   end
   
-  it "calculates the time of today's sunset" do
-    forecast = Forecast.query('24060')
+  it "calculates the amount of daylight remaining today" do
+    forecast = Forecast.create(:location => @location, :sunset_in_seconds => 69600, :cached => true)
+  
     forecast.sunset.should_not be_nil
+    forecast.daylight_remaining.should_not be_nil
   end
   
-  it "calculates the current time" do
-    forecast = Forecast.query('24060')
-    forecast.current_time_at.should_not be_nil
+  it "determines if the forecast occurs today" do
+    forecast = Forecast.create(:location => @location, :cached => true)
+    forecast.today?.should be true
+    
+    forecast.date = "01/01/2011"
+    forecast.today?.should be false
   end
   
-  it "calulates the amount of daylight remaining today" do
-    location = Forecast.query('24060')
-    location.daylight_remaining.should_not be_nil
+  
+  it "caches weather data for a location" do
+    forecast = Forecast.create(:location => @location)
+
+    forecast.cached?.should be true
+    forecast.today?.should be true
+    forecast.sunset.should_not be_nil
+    forecast.daylight_remaining.should_not be_nil
   end
+  
 end

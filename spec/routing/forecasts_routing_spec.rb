@@ -1,10 +1,12 @@
+require 'spec_helper'
+
 describe "routes for Forecasts" do
-  it "routes /forecasts to the forecasts controller" do
-    get("/forecasts").should route_to("forecasts#index")
-    post("/forecasts/search").should route_to("forecasts#search")
+  it "routes /locations to the locations controller" do
+    get("/locations").should route_to("locations#index")
+    post("/locations/search").should route_to("locations#search")
   end
 
-  it "routes / to the forecasts controller" do
-    get("/").should route_to("forecasts#index")
+  it "routes / to the locations controller" do
+    get("/").should route_to("locations#index")
   end
 end
