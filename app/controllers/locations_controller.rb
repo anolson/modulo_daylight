@@ -1,6 +1,6 @@
 class LocationsController < ApplicationController
   def index
-    @forecast = Forecast.new
+    @location = Location.new
   end
   
   def search

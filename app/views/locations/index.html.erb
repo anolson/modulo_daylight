@@ -1,7 +1,7 @@
 <section>
   <div class="content">
     <h2>Hey, where are you?</h2>
-    <%= form_for @forecast, :url => search_locations_path do |f| %>
+    <%= form_for @location, :url => search_locations_path do |f| %>
       <%= text_field_tag 'query', nil, :size => 32 %>
       <%= f.submit "Go &rsaquo;".html_safe %>
     <% end %>     
