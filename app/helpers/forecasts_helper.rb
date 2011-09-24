@@ -1,6 +1,6 @@
 module ForecastsHelper
   def format_time(time)
-    format = (time.hour == 0) && "%k:%M" || "%l:%M"
-    time.round.strftime(format).lstrip
+    # (time.hour == 0) && "%k:%M" || 
+    time.round.strftime((time.hour == 0) && "%k:%M" || "%l:%M").lstrip
   end
 end
