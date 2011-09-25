@@ -11,7 +11,8 @@ class Forecast < ActiveRecord::Base
   end
   
   def sunset
-    localize_time Time.local(date.year, date.month, date.day, time_of_sunset.hour, time_of_sunset.min, time_of_sunset.sec)
+    Time.zone = location.timezone 
+    Time.zone.local(date.year, date.month, date.day, time_of_sunset.hour, time_of_sunset.min, time_of_sunset.sec)
   end
 
   def daylight_remaining
