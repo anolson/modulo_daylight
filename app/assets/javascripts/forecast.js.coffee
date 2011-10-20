@@ -3,3 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 $(document).ready ->
   $('#query').focus()
+  setInterval(updateDaylightRemaining, 60000)
+
+updateDaylightRemaining = () ->
+  $.getScript this.location

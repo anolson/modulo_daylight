@@ -1,8 +1,10 @@
 class ForecastsController < ApplicationController
   before_filter :find_location
 
+  respond_to :html, :json, :js
+
   def show
-    @forecast = @location.forecast_for_today
+    respond_with(@forecast = @location.forecast_for_today)
   end
   
   private 

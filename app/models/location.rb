@@ -32,6 +32,13 @@ class Location < ActiveRecord::Base
     { :city => city.gsub(" ", "_"), :state => state.gsub(" ", "_") }
   end
 
+  def as_json(options = {})
+    {
+      :name => name,
+      :timezone => timezone
+    }
+  end
+
   private
     def self.remove_underscores!(options)
       options.each { |k, v| v.gsub("_", " ").downcase! if( [:city, :state].include? k ) }

@@ -33,6 +33,14 @@ class Forecast < ActiveRecord::Base
     date == today
   end
 
+  def as_json(options = {})
+    {
+      :daylight_remaining => daylight_remaining,
+      :location => location,
+      :sunset => sunset
+    }
+  end
+
   private
     def localize_time(time)
       time.in_time_zone(location.timezone)
