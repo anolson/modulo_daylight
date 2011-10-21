@@ -4,6 +4,6 @@ module ForecastsHelper
   end
 
   def format_datetime(time)
-    time.strftime('%Y-%m-%dT%I:%M:%SZ')
+    time.iso8601
   end
 end
