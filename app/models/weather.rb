@@ -1,4 +1,4 @@
-require 'base'
+require 'model'
 
 class Weather < Model
   
